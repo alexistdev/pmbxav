@@ -101,6 +101,14 @@ if ( ! function_exists('_judulAplikasi')) {
 	}
 }
 
+/** untuk title */
+if ( ! function_exists('_namaSekolah')) {
+	function _namaSekolah()
+	{
+		return "SMP Xaverius";
+	}
+}
+
 
 /** untuk angka unik */
 if(! function_exists('angkaUnik')){
