@@ -48,35 +48,9 @@ class Registration extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->form_validation->set_rules(
-			'username',
-			'Username',
-			'trim|required|max_length[50]',
-			array(
-				'required' => 'Username harus diisi!',
-				'max_length' => 'Panjang karakter username maksimal 50 karakter!'
-			)
-
-		);
-		$this->form_validation->set_rules(
-			'password',
-			'Password',
-			'trim|required|max_length[50]',
-			array(
-				'required' => 'Password harus diisi!',
-				'max_length' => 'Panjang karakter password maksimal 50 karakter!'
-			)
-		);
-		$this->form_validation->set_rules(
-			'captcha',
-			'Captcha',
-			'trim|callback__check_captcha|required|max_length[5]',
-			array(
-				'required' => 'Captcha harus diisi!',
-				'max_length' => 'Panjang karakter captcha maksimal 5 karakter!'
-			)
-		);
-		$this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
+		$this->form_validation->set_data($this->input->post());
+		$this->form_validation->set_rules($this->cekValidasi());
+		$this->form_validation->set_error_delimiters('<span class="text-danger text-sm" >', '</span>');
 		if ($this->form_validation->run() === false) {
 			$this->session->set_flashdata('pesan', validation_errors());
 			$data['image'] = $this->_create_captcha();
@@ -102,6 +76,46 @@ class Registration extends CI_Controller {
 //				redirect("staff/dashboard");
 //			}
 		}
+	}
+
+	private function cekValidasi()
+	{
+		$config = array(
+			array(
+				'field' => 'namaLengkap',
+				'label' => 'Nama Lengkap',
+				'rules' => 'trim|required',
+				array(
+					'required' => 'Nama harus diisi!',
+					'max_length' => 'Panjang karakter maksimal 50 karakter!'
+				)
+			)
+		);
+		return $config;
+//		$this->form_validation->set_rules(
+//			'namaLengkap',
+//			'Nama Lengkap',
+//			'trim|required|max_length[50]',
+//
+//		);
+//		$this->form_validation->set_rules(
+//			'nisn',
+//			'NISN',
+//			'trim|required|max_length[30]',
+//			array(
+//				'required' => 'Nisn harus diisi!',
+//				'max_length' => 'Panjang karakter maksimal 30 karakter!'
+//			)
+//		);
+//		$this->form_validation->set_rules(
+//			'captcha',
+//			'Captcha',
+//			'trim|callback__check_captcha|required|max_length[5]',
+//			array(
+//				'required' => 'Captcha harus diisi!',
+//				'max_length' => 'Panjang karakter captcha maksimal 5 karakter!'
+//			)
+//		);
 	}
 
 }
