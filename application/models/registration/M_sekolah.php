@@ -3,6 +3,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_sekolah extends CI_Model
 {
+	/**
+	 * Aplikasi Penerimaan Siswa Baru
+	 * Dikembangkan oleh: KencanaTech
+	 * web: www.kencanatech.com
+	 * contact: alexistdev@gmail.com
+	 * hp : 082371408678
+	 */
+
 	protected $admin;
 
 	public function __construct()

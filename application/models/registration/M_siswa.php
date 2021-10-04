@@ -3,6 +3,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_siswa extends CI_Model
 {
+	/**
+	 * Aplikasi Penerimaan Siswa Baru
+	 * Dikembangkan oleh: KencanaTech
+	 * web: www.kencanatech.com
+	 * contact: alexistdev@gmail.com
+	 * hp : 082371408678
+	 */
+
 	protected $siswa;
 
 	public function __construct()
@@ -32,6 +40,24 @@ class M_siswa extends CI_Model
 			'status' => 1
 		);
 		return $this->db->insert($this->siswa, $dataSiswa);
+	}
+
+	/** untuk validasi login */
+	public function validasi_login($username)
+	{
+		$this->db->where('nisn', $username);
+		return $this->db->get($this->siswa);
+	}
+
+	/** Mendapatkan data siswa */
+
+	public function get_data_siswa($id=null)
+	{
+		if($id != null){
+			$this->db->where("$this->siswa.id",$id);
+		}
+//		$this->db->order_by("$this->siswa.id","DESC");
+		return $this->db->get($this->siswa);
 	}
 
 

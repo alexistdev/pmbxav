@@ -3,6 +3,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Registration extends CI_Controller {
 
+	/**
+	 * Aplikasi Penerimaan Siswa Baru
+	 * Dikembangkan oleh: KencanaTech
+	 * web: www.kencanatech.com
+	 * contact: alexistdev@gmail.com
+	 * hp : 082371408678
+	 */
+
 
 	public $session;
 	public $form_validation;
@@ -15,8 +23,8 @@ class Registration extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('admin/M_sekolah','sekolah');
-		$this->load->model('admin/M_siswa','siswa');
+		$this->load->model('registration/M_sekolah','sekolah');
+		$this->load->model('registration/M_siswa','siswa');
 		$this->title = "Registrasi Penerimaan Siswa Baru | "._namaSekolah();
 		if ($this->session->userdata('is_login_in') == TRUE) {
 			redirect('Member');
@@ -80,7 +88,7 @@ class Registration extends CI_Controller {
 		} else {
 			$siswa = $this->siswa;
 			$siswa->save();
-			$this->session->set_flashdata('pesan1', '<div class="alert alert-danger" role="alert">Akun berhasil dibuat, silahkan gunakan nisn sebagai username dan password!</div>');
+			$this->session->set_flashdata('pesan2', '<div class="alert alert-success" role="alert">Akun berhasil dibuat, silahkan gunakan nisn sebagai username dan password!</div>');
 			redirect('login');
 		}
 	}

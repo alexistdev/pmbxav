@@ -1,3 +1,13 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+/**
+ * Aplikasi Penerimaan Siswa Baru
+ * Dikembangkan oleh: KencanaTech
+ * web: www.kencanatech.com
+ * contact: alexistdev@gmail.com
+ * hp : 082371408678
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,7 +213,7 @@
 							<span class="breadcrumb__title">Jadwal PPDB</span>
 						</span>
 							</a>
-							<a href="#">
+							<a href="<?= base_url('Login'); ?>">
 						<span class="breadcrumb__inner">
 							<span class="breadcrumb__title">Login</span>
 						</span>
