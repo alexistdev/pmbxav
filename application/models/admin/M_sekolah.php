@@ -40,4 +40,6 @@ class M_sekolah extends CI_Model
 		return array_combine($cat_id, $cat_name);
 	}
 
+
+
 }

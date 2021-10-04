@@ -9,12 +9,14 @@ class Registration extends CI_Controller {
 	public $input;
 	public $sekolah;
 	protected $title;
+	public $siswa;
 
 	/** Constructor dari Class Login */
 	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('admin/M_sekolah','sekolah');
+		$this->load->model('admin/M_siswa','siswa');
 		$this->title = "Registrasi Penerimaan Siswa Baru | "._namaSekolah();
 		if ($this->session->userdata('is_login_in') == TRUE) {
 			redirect('Member');
@@ -66,7 +68,6 @@ class Registration extends CI_Controller {
 
 		$this->form_validation->set_data($this->input->post());
 		$this->form_validation->set_rules($this->cekValidasi());
-
 		$this->form_validation->set_error_delimiters('<span class="text-danger text-sm" >', '</span>');
 		if ($this->form_validation->run() === false) {
 			$this->session->set_flashdata('pesan', validation_errors());
@@ -77,27 +78,16 @@ class Registration extends CI_Controller {
 			$view ='v_registration';
 			$this->_layout($data,$view);
 		} else {
-//			$username = $this->input->post('username', TRUE);
-//			$password = $this->input->post('password', TRUE);
-//			$cekLogin = $this->login->validasi_login($username)->row();
-//
-//			if(!password_verify($password, $cekLogin->password)){
-//				$this->session->set_flashdata('pesan2', '<div class="alert alert-danger" role="alert">Username atau password anda salah!</div>');
-//				redirect("Login");
-//			} else {
-//				$data_session =
-//					array(
-//						'id_user' => $cekLogin->id_user,
-//						'is_login_toko' => TRUE,
-//					);
-//				$this->session->set_userdata($data_session);
-//				redirect("staff/dashboard");
-//			}
+			$siswa = $this->siswa;
+			$siswa->save();
+			$this->session->set_flashdata('pesan1', '<div class="alert alert-danger" role="alert">Akun berhasil dibuat, silahkan gunakan nisn sebagai username dan password!</div>');
+			redirect('login');
 		}
 	}
 
 
 
+	/** Validasi input registration */
 	private function cekValidasi()
 	{
 		$config = array(
@@ -216,6 +206,15 @@ class Registration extends CI_Controller {
 				'field' => 'captcha',
 				'label' => 'Captcha',
 				'rules' => 'trim|callback__check_captcha|required|max_length[5]',
+				'errors' => array(
+					'required' => 'Anda harus mengisi %s.',
+					'max_length' => 'Anda harus mengisi %s dengan benar.'
+				),
+			),
+			array(
+				'field' => 'beratBadan',
+				'label' => 'berat badan',
+				'rules' => 'trim|required|max_length[11]',
 				'errors' => array(
 					'required' => 'Anda harus mengisi %s.',
 					'max_length' => 'Anda harus mengisi %s dengan benar.'

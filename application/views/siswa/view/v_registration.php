@@ -221,7 +221,7 @@
 											'name' => 'namaLengkap',
 											'placeholder' => 'Nama Lengkap',
 											'value' => set_value('namaLengkap'),
-//											'required' => 'required'
+											'required' => 'required'
 									)); ?>
 
 									<?= form_error('namaLengkap'); ?>
@@ -234,7 +234,7 @@
 											'name' => 'nisn',
 											'placeholder' => 'NISN',
 											'value' => set_value('nisn'),
-											//'required' => 'required'
+											'required' => 'required'
 									)); ?>
 									<?= form_error('nisn'); ?>
 								</div>
@@ -249,7 +249,7 @@
 									<?= form_input(array(
 											'type' => 'number',
 											'class' => (!empty(form_error('jmlSaudara'))) ? "form-control is-invalid" : "form-control",
-											'name' => 'nisn',
+											'name' => 'jmlSaudara',
 											'placeholder' => '0',
 											'value' => set_value('jmlSaudara'),
 										//'required' => 'required'
@@ -319,9 +319,14 @@
 								<!-- Start : Nomor Telepon -->
 								<div class="form-group">
 									<label for="nomorTelepon">Nomor Telepon :</label>
-									<input type="text" name="nomorTelepon"
-										   class="form-control <?= (!empty(form_error('nomorTelepon'))) ? "is-invalid" : ""; ?>"
-										   placeholder="0812345678">
+									<?= form_input(array(
+											'type' => 'text',
+											'class' => (!empty(form_error('nomorTelepon'))) ? "form-control is-invalid" : "form-control",
+											'name' => 'nomorTelepon',
+											'placeholder' => '0812345678',
+											'value' => set_value('nomorTelepon'),
+										//'required' => 'required'
+									)); ?>
 									<?= form_error('nomorTelepon'); ?>
 								</div>
 
@@ -333,17 +338,29 @@
 								<!-- Start : Tempat Lahir -->
 								<div class="form-group">
 									<label for="tempatLahir">Tempat Lahir :</label>
-									<input type="text" name="tempatLahir"
-										   class="form-control <?= (!empty(form_error('tempatLahir'))) ? "is-invalid" : ""; ?>"
-										   placeholder="Tempat Lahir">
-									<?= form_error('tempatLahir'); ?>
+									<?= form_input(array(
+											'type' => 'text',
+											'class' => (!empty(form_error('tempatLahir'))) ? "form-control is-invalid" : "form-control",
+											'name' => 'tempatLahir',
+											'placeholder' => 'Tempat Lahir',
+											'value' => set_value('tempatLahir'),
+										//'required' => 'required'
+									)); ?>
 								</div>
 								<!-- End : Tempat Lahir -->
 								<!-- Start : Tanggal Lahir -->
 								<div class="form-group">
 									<label for="tanggalLahir">Tanggal Lahir :</label>
-									<input type="text" name="tanggalLahir" id="datepicker" class="form-control <?= (!empty(form_error('tanggalLahir'))) ? "is-invalid" : ""; ?>"
-										   placeholder="01-01-2021">
+									<?= form_input(array(
+											'type' => 'text',
+											'class' => (!empty(form_error('tanggalLahir'))) ? "form-control is-invalid" : "form-control",
+											'name' => 'tanggalLahir',
+											'placeholder' => '01-01-2021',
+											'value' => set_value('tanggalLahir'),
+											'id' => 'datepicker'
+										//'required' => 'required'
+									)); ?>
+
 									<?= form_error('tanggalLahir'); ?>
 								</div>
 								<!-- End : Tanggal Lahir -->
@@ -352,14 +369,16 @@
 							<div class="form-row">
 								<!-- Start : Golongan Darah -->
 								<div class="form-group">
-									<label for="gol">Golongan Darah :</label>
-									<select name="golDarah" class="form-select <?= (!empty(form_error('golDarah'))) ? "is-invalid" : ""; ?>" aria-label="Default select example">
-										<option value="" selected>Pilih</option>
-										<option value="A">A</option>
-										<option value="B">B</option>
-										<option value="AB">B</option>
-										<option value="O">O</option>
-									</select>
+									<label for="golDarah">Golongan Darah :</label>
+									<?php $optionDarah = array(
+											'' => 'Pilih',
+											'A' => 'A',
+											'B' => 'B',
+											'AB' => 'AB',
+											'O' => 'O',
+									); ?>
+									<?= form_dropdown('golDarah',$optionDarah,set_value('golDarah'),array('class' => (!empty(form_error('golDarah'))) ? "form-control is-invalid" : "form-control")); ?>
+
 									<?= form_error('golDarah'); ?>
 								</div>
 								<!-- End : Golongan Darah -->
@@ -367,17 +386,54 @@
 								<!-- Start : Tinggi badan -->
 								<div class="form-group">
 									<label for="tinggiBadan">Tinggi Badan :</label>
-									<input type="text" name="tinggiBadan" class="form-control <?= (!empty(form_error('tinggiBadan'))) ? "is-invalid" : ""; ?>" placeholder="165">
+									<?= form_input(array(
+											'type' => 'text',
+											'class' => (!empty(form_error('tinggiBadan'))) ? "form-control is-invalid" : "form-control",
+											'name' => 'tinggiBadan',
+											'placeholder' => '165',
+											'value' => set_value('tinggiBadan'),
+										//'required' => 'required'
+									)); ?>
+
 									<?= form_error('tinggiBadan'); ?>
 								</div>
 								<!-- End : Tinggi badan -->
 
 							</div>
+
+						<div class="form-row">
+
+							<!-- Start : Berat Badan badan -->
+							<div class="form-group">
+								<label for="beratBadan">Berat Badan :</label>
+								<?= form_input(array(
+										'type' => 'text',
+										'class' => (!empty(form_error('beratBadan'))) ? "form-control is-invalid" : "form-control",
+										'name' => 'beratBadan',
+										'placeholder' => '55',
+										'value' => set_value('beratBadan'),
+									//'required' => 'required'
+								)); ?>
+
+								<?= form_error('beratBadan'); ?>
+							</div>
+							<!-- End : Berat badan -->
+
+						</div>
+
 							<div class="form-row">
 								<div class="form-group">
 									<?= $image; ?>
 									<label for="captcha">Captcha :</label>
-									<input type="text" name="captcha" class="form-control <?= (!empty(form_error('captcha'))) ? "is-invalid" : ""; ?>" placeholder="captcha">
+									<?= form_input(array(
+											'type' => 'text',
+											'class' => (!empty(form_error('captcha'))) ? "form-control is-invalid" : "form-control",
+											'name' => 'captcha',
+											'placeholder' => 'captcha',
+											'value' => set_value('captcha'),
+										//'required' => 'required'
+									)); ?>
+
 									<?= form_error('captcha'); ?>
 								</div>
 							</div>
